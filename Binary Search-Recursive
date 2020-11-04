@@ -1,0 +1,28 @@
+def rec_binary(arr,target,minimum,len0): #Fonksiyonumuzu tanımladık
+  if minimum > len0: #Alt sınır üst sınırdan büyükse 
+    print("This number was not found in array.") #Sayı dizide bulunamadı şeklinde ekrana yazdırılır
+    return False #False döndürür
+  else: #Alt sınır üst sınırdan küçükse
+    middle=(minimum + (len0)) // 2 #Ortadaki sayıyı bulmak için middle adında bir değişken tanımladık
+    if arr[middle] == target:  #Aranan sayı ortadaki sayıya eşitse
+      print("Found at position ", middle)  #Sayı bulunduğu indisle birlikte ekrana yazdırılacak
+    elif target > arr[middle]:  #Aranan sayı ortadaki sayıdan büyükse
+      return rec_binary(arr,target,middle+1,len0) #Alt sınırı ortadaki sayıdan bir fazla olarak değiştiriyoruz ve rec_binary fonksiyonunu geriye döndürüyoruz
+    else:  #Aranan sayı ortadaki sayıdan küçükse
+      return rec_binary(arr,target,minimum,middle-1)#Üst sınırı ortadaki sayıdan bir eksik olarak değiştiriyoruz ve rec_binary fonksiyonunu geriye döndürüyoruz
+#Aranan sayı bulunana kadar döngü tekrarlanır 
+
+numbers = [] #Kullanıcıdan aldığımız sayıları tutmak için boş bir dizi tanımladık 
+while True:  #Sayıları istemek için bir while döngüsü oluşturduk
+  number = input("Enter an integer number:")  #Kullanıcıdan sayıları girmesini istiyoruz
+  if number == "":  #İstediği kadar sayı girdikten sonra döngüden çıkmak için bir boşluk bırakmalı
+    break   #Break komutuyla döngüden çıkar
+  numbers.append(int(number))  #Append fonksiyonuyla girilen sayılar numbers dizisine aktarılacak
+print(numbers) #Numbers dizisini ekrana bastırır
+numbers.sort() #Sort fonksiyonuyla sayılar sıralanır
+print(numbers) #Numbers dizisi sayıların sıralanmış şekliyle ekrana bastırılır
+number = int(input("Enter the number you are looking for between 1 and 100 : "))#Kullanıcıdan aranmasını istediği sayıyı girmesini istiyoruz 
+uzunluk = len(numbers)-1  #Üst sınırı tutacak end adında bir değişken tanımladık ve buna numbers dizisinin uzunluğu - 1 atadık
+start = 0  #Alt sınırı tutacak start adında bir değişken tanımladık ve buna  0 atadık
+result = False  #Result adında bir değişken tanımladık ve buna False atadık
+rec_binary(numbers,number,start,uzunluk) #rec_binary adında bir fonksiyon oluşturduk
